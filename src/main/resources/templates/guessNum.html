@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Dice</title>
+</head>
+<body>
+
+<a th:href="@{/roll-dice/1}" class="btn btn-primary px-2 py-1">1</a>
+<a th:href="@{/roll-dice/2}" class="btn btn-primary px-2 py-1">2</a>
+<a th:href="@{/roll-dice/3}" class="btn btn-primary px-2 py-1">3</a>
+<a th:href="@{/roll-dice/4}" class="btn btn-primary px-2 py-1">4</a>
+<a th:href="@{/roll-dice/5}" class="btn btn-primary px-2 py-1">5</a>
+<a th:href="@{/roll-dice/6}" class="btn btn-primary px-2 py-1">6</a>
+
+<h2 th:text="${userGuess}"></h2>
+<h2 th:text="${diceRoll}"></h2>
+<h2 th:text="${guess}"></h2>
+
+
+
+</body>
+</html>
