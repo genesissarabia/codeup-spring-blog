@@ -1,6 +1,7 @@
 package com.codeup.codeupspringblog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,9 +16,10 @@ public class PostController {
         return "posts index page";
     }
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public String onePostRoute(@PathVariable int id) {
-        return "view an individual post";
+    public String onePostRoute(@PathVariable Long id, Model model) {
+        Post newPost = new Post(1L, "Howdy!", "This is my first post! :)");
+        model.addAttribute("newPost", newPost);
+        return "posts/show";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
     @ResponseBody
