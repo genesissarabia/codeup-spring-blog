@@ -29,7 +29,6 @@ public class PostController {
     public String onePostRoute(@PathVariable Long id, Model model) {
         Post post = postDao.findById(id).get();
         post.getUser();
-
         model.addAttribute("newPost", post);
         return "posts/show";
     }
@@ -40,9 +39,26 @@ public class PostController {
     }
     @PostMapping(path = "/posts/create")
     public String createThePostRoute(@ModelAttribute Post post) {
+        post.setUser(userDao.getReferenceById(1L));
         postDao.save(post);
         return "redirect:/posts";
     }
 
+    @GetMapping(path = "/posts/{id}/edit")
+    public String editGet(Model model, @PathVariable Long id) {
+        Post post = postDao.findById(id).get();
 
+        model.addAttribute("post", post);
+
+        return "posts/create";
+    }
+//    @PostMapping(path = "/posts/{id}/edit")
+//    public String editPost(@ModelAttribute Post post){
+//
+//        postDao.save(post);
+//
+//        return "redirect:/posts";
+//
+//
+//    }
 }

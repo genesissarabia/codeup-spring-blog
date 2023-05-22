@@ -8,14 +8,12 @@
 </head>
 <body>
     <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
-        <form>
             <label>Title:</label><br>
             <input th:field="*{title}"><br>
             <label>Body:</label><br>
             <input th:field="*{body}"><br>
-            <input type="submit" value="submit">
-        </form>
-
+        <input th:field="*{id}" th:value="*{id}" type="hidden"><br>
+        <input type="submit" value="submit">
     </form>
 </body>
 </html>
