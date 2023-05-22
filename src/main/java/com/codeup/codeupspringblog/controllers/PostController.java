@@ -27,8 +27,10 @@ public class PostController {
     }
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String onePostRoute(@PathVariable Long id, Model model) {
+        Post post = postDao.findById(id).get();
+        post.getUser();
 
-        model.addAttribute("newPost", postDao.findById(id));
+        model.addAttribute("newPost", post);
         return "posts/show";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
@@ -36,9 +38,10 @@ public class PostController {
         return "posts/create";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String createThePostRoute(@RequestParam("title") String title, @RequestParam("body") String body, User user, Model model) {
-        Post post = new Post(1L, title, body, user);
-        model.addAttribute("post", postDao.save(post));
+    public String createThePostRoute(@RequestParam("title") String title, @RequestParam("body") String body) {
+        User user1 = userDao.findById(1L).get();
+        Post post = new Post(title, body, user1) ;
+        postDao.save(post);
         return "redirect:/posts";
     }
 

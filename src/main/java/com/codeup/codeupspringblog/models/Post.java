@@ -23,6 +23,11 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+    public Post (String title, String body, User user){
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
     public Post (Long id, String title, String body, User user){
         this.id = id;
         this.title = title;
@@ -49,5 +54,9 @@ public class Post {
 
     public Long getId() {
         return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

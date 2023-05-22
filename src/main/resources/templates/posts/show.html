@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
@@ -7,5 +8,6 @@
 <body>
 <h2 th:text="${newPost.title}"></h2>
 <p th:text="${newPost.body}"></p>
+<p th:text="${newPost.getUser().getEmail()}"></p>
 </body>
 </html>
