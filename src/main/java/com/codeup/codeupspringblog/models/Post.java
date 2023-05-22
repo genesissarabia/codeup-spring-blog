@@ -23,6 +23,12 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+    public Post (Long id, String title, String body, User user){
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
 
     public String getBody() {
         return body;

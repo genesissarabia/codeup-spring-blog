@@ -1,21 +1,22 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -35,8 +36,8 @@ public class PostController {
         return "posts/create";
     }
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String createThePostRoute(@RequestParam("title") String title, @RequestParam("body") String body, Model model) {
-        Post post = new Post(1L, title, body);
+    public String createThePostRoute(@RequestParam("title") String title, @RequestParam("body") String body, User user, Model model) {
+        Post post = new Post(1L, title, body, user);
         model.addAttribute("post", postDao.save(post));
         return "redirect:/posts";
     }
