@@ -33,16 +33,16 @@ public class PostController {
         model.addAttribute("newPost", post);
         return "posts/show";
     }
-    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    public String createFormRoute() {
+    @GetMapping(path = "/posts/create")
+    public String createFormRoute(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    public String createThePostRoute(@RequestParam("title") String title, @RequestParam("body") String body) {
-        User user1 = userDao.findById(1L).get();
-        Post post = new Post(title, body, user1) ;
+    @PostMapping(path = "/posts/create")
+    public String createThePostRoute(@ModelAttribute Post post) {
         postDao.save(post);
         return "redirect:/posts";
     }
+
 
 }
