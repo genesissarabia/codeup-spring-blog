@@ -8,8 +8,9 @@
 <body>
 <h2>Welcome to your posts!</h2>
 <div th:each="post : ${posts}">
-    <h4 th:text="${post.title}"></h4>
+    <a th:href="@{/posts/{id}(id=${post.getId()})}" ><h4 th:text="${post.title}"></h4></a>
     <p th:text="${post.body}"></p>
+    <a th:href="@{/posts/email/{id}(id=${post.getId()})}">Email about the post.</a>
 </div>
 
 </body>

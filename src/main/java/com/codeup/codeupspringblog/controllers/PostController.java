@@ -1,9 +1,9 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
-import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -52,6 +54,19 @@ public class PostController {
 
         return "posts/create";
     }
+
+    @GetMapping(path = "/posts/email/{id}")
+    public String sendEmailAboutPost(@PathVariable Long id){
+        Post post = postDao.getReferenceById(id);
+         emailService.prepareAndSend(post, "Post inquiry information.", post.getTitle() + " : " + post.getBody() + " — was posted by: " + post.getUser().getUsername());
+         return "redirect:/posts";
+    }
+
+
+
+
+
+
 //    @PostMapping(path = "/posts/{id}/edit")
 //    public String editPost(@ModelAttribute Post post){
 //
