@@ -52,11 +52,7 @@ public class SecurityConfiguration {
                 /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(
-                        "/posts/create", // only authenticated users can create ads
-                        "/posts/{id}/edit" // only authenticated users can edit ads
-                )
-                .authenticated()
+                .requestMatchers("/posts/add", "/posts/{id}/edit").authenticated()
         ;
         return http.build();
     }

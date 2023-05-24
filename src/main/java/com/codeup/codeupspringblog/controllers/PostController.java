@@ -34,7 +34,7 @@ public class PostController {
         model.addAttribute("newPost", post);
         return "posts/show";
     }
-    @GetMapping(path = "/posts/create")
+    @GetMapping(path = "/posts/add")
     public String createFormRoute(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
