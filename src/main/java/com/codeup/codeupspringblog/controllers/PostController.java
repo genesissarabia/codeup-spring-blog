@@ -39,12 +39,13 @@ public class PostController {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
-    @PostMapping(path = "/posts/create")
-    public String createThePostRoute(@ModelAttribute Post post) {
-        post.setUser(userDao.getReferenceById(1L));
-        postDao.save(post);
-        return "redirect:/posts";
-    }
+
+//    @PostMapping(path = "/posts/create")
+//    public String createThePostRoute(@ModelAttribute Post post) {
+//        post.setUser(userDao.getReferenceById(1L));
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
 
     @GetMapping(path = "/posts/{id}/edit")
     public String editGet(Model model, @PathVariable Long id) {
@@ -63,17 +64,4 @@ public class PostController {
     }
 
 
-
-
-
-
-//    @PostMapping(path = "/posts/{id}/edit")
-//    public String editPost(@ModelAttribute Post post){
-//
-//        postDao.save(post);
-//
-//        return "redirect:/posts";
-//
-//
-//    }
 }
